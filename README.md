@@ -25,3 +25,5 @@ Este projeto resolve esse problema criando um pipeline automatizado, rastreável
 * Construir um pipeline escalável com Airflow e DBT
 * Realizar validações e limpeza de dados
 * Documentar tudo de forma clara para portfólio profissional
+
+Testando Git
