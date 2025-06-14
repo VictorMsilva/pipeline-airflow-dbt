@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+pipeline_airflow_dbt.egg-info/PKG-INFO
+pipeline_airflow_dbt.egg-info/SOURCES.txt
+pipeline_airflow_dbt.egg-info/dependency_links.txt
+pipeline_airflow_dbt.egg-info/requires.txt
+pipeline_airflow_dbt.egg-info/top_level.txt

@@ -1,0 +1,107 @@
+Metadata-Version: 2.4
+Name: pipeline-airflow-dbt
+Version: 0.1.0
+Summary: Pipeline de ingestão e transformação de dados públicos com Airflow e DBT
+Author-email: Seu Nome <seu@email.com>
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=2.3.0
+Requires-Dist: pandas>=2.3.0
+
+# pipeline-airflow-dbt
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-vicmo-blue?logo=linkedin)](https://www.linkedin.com/in/seu-perfil)
+[![GitHub](https://img.shields.io/badge/GitHub-vicmo-black?logo=github)](https://github.com/seu-usuario)
+
+## 🏗️ Visão Geral
+
+Pipeline de ingestão e transformação de dados públicos utilizando Airflow e DBT. O objetivo é automatizar a coleta, limpeza e disponibilização de dados abertos de fontes como IBGE, Ministério da Saúde e Brasil.io, facilitando análises e relatórios reprodutíveis.
+
+## 📌 Resumo do Projeto
+
+Criar um pipeline de dados completo e modular para ingestão, transformação e disponibilização de dados abertos, utilizando ferramentas modernas da stack de engenharia de dados.
+
+## 🩺 Contexto e Problema
+
+Órgãos públicos como o IBGE, Ministério da Saúde e plataformas como http://Brasil.io  oferecem grandes volumes de dados úteis, mas disponibilizam essas informações de forma despadronizada: CSVs separados por ano, APIs com formatos inconsistentes e campos mal documentados.
+
+Organizações ou analistas que desejam usar esses dados para monitorar tendências (ex: COVID, preços, população) enfrentam desafios como:
+
+* Ingestão manual ou pouco confiável
+* Falta de automação e versionamento
+* Transformações repetitivas e sem rastreabilidade
+* Baixa reprodutibilidade de relatórios e análises
+
+Este projeto resolve esse problema criando um pipeline automatizado, rastreável e testável para transformar os dados brutos em tabelas limpas e analíticas, prontas para uso em BI.
+
+## 🛠️ Tecnologias Utilizadas
+
+- [Apache Airflow](https://airflow.apache.org/)
+- [DBT (Data Build Tool)](https://www.getdbt.com/)
+- Python 3.x
+- Docker (opcional para orquestração)
+- Outras dependências listadas em `requirements.txt`
+
+## 📁 Estrutura do Projeto
+
+```
+pipeline-airflow-dbt/
+├── dags/                # DAGs do Airflow
+├── dbt/                 # Projeto DBT
+├── data/                # Dados brutos e processados
+├── scripts/             # Scripts auxiliares
+├── requirements.txt     # Dependências Python
+├── docker-compose.yml   # (Opcional) Orquestração com Docker
+└── README.md
+```
+
+## 🚀 Como Executar
+
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/seu-usuario/pipeline-airflow-dbt.git
+   cd pipeline-airflow-dbt
+   ```
+
+2. **Instale as dependências**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Configure variáveis de ambiente**  
+   (Exemplo: crie um arquivo `.env` com as credenciais necessárias)
+
+4. **Inicie o Airflow**
+   ```bash
+   airflow db init
+   airflow webserver --port 8080
+   airflow scheduler
+   ```
+
+5. **Execute o pipeline**
+   - Acesse o Airflow em [localhost:8080](http://localhost:8080)
+   - Ative e execute a DAG desejada
+
+6. **Transforme os dados com DBT**
+   ```bash
+   cd dbt
+   dbt run
+   dbt test
+   ```
+
+## 💡 Exemplo de Uso
+
+Após executar o pipeline, as tabelas limpas estarão disponíveis para análise em ferramentas de BI ou notebooks Python.
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas!  
+Abra uma issue ou envie um pull request.
+
+## 📄 Licença
+
+Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+Desenvolvido por [Seu Nome](https://www.linkedin.com/in/seu-perfil)

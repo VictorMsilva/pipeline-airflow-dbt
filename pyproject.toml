@@ -1,0 +1,22 @@
+[project]
+name = "pipeline-airflow-dbt"
+version = "0.1.0"
+description = "Pipeline de ingestão e transformação de dados públicos com Airflow e DBT"
+authors = [
+    { name="Seu Nome", email="seu@email.com" }
+]
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "numpy>=2.3.0",
+    # Adicione outras dependências conforme necessário
+    "pandas>=2.3.0",
+]
+
+[tool.uv]
+# Configuração padrão para uso com uv venv
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
