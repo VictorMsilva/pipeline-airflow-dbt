@@ -1,0 +1,8 @@
+# pipeline-airflow-dbt/dbt/dbt_project.yml
+name: 'meu_projeto'
+version: '1.0'
+profile: 'default'
+
+models:
+  meu_projeto:
+    +materialized: view

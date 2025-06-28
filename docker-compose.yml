@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: database_postgres
+    environment:
+      POSTGRES_DB: empresa
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: "admin"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  airflow:
+    image: apache/airflow:2.8.1
+    container_name: airflow
+    depends_on:
+      - db
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin_user:admin3730@db:5432/empresa
+      AIRFLOW__CORE__FERNET_KEY: ''
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    ports:
+      - "8080:8080"
+    command: >
+      bash -c "airflow db upgrade &&
+               airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com &&
+               airflow webserver"
+
+  dbt:
+    image: ghcr.io/dbt-labs/dbt-postgres:1.7.9
+    container_name: dbt
+    depends_on:
+      - db
+    environment:
+      DBT_PROFILES_DIR: /dbt
+    volumes:
+      - ./dbt:/dbt
+    working_dir: /dbt
+    entrypoint: ["tail", "-f", "/dev/null"]  # Mantém o container rodando para execuções interativas
+
+volumes:
+  postgres_data:
