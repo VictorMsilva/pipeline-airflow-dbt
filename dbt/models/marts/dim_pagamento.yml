@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: dim_pagamento
+    description: "Dimensão de métodos de pagamento"
+    columns:
+      - name: id_pagamento
+        tests:
+          - not_null
+          - unique
+      - name: metodo_pagamento
+        tests:
+          - not_null

@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: dim_produto
+    description: "Dimensão de produtos com categoria e fornecedor"
+    columns:
+      - name: id_produto
+        tests:
+          - not_null
+          - unique
+      - name: preco_unitario
+        tests:
+          - not_null
+      - name: nome_categoria
+        tests:
+          - not_null

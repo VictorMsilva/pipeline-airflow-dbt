@@ -4,10 +4,8 @@ services:
   db:
     image: postgres:15
     container_name: database_postgres
-    environment:
-      POSTGRES_DB: empresa
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: "admin"
+    env_file:
+      - variaveis.env
     ports:
       - "5432:5432"
     volumes:
@@ -16,13 +14,10 @@ services:
   airflow:
     image: apache/airflow:2.8.1
     container_name: airflow
+    env_file:
+      - variaveis.env
     depends_on:
       - db
-    environment:
-      AIRFLOW__CORE__EXECUTOR: LocalExecutor
-      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin_user:admin3730@db:5432/empresa
-      AIRFLOW__CORE__FERNET_KEY: ''
-      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
@@ -34,6 +29,21 @@ services:
                airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com &&
                airflow webserver"
 
+  airflow-scheduler:
+    image: apache/airflow:2.8.1
+    container_name: airflow_scheduler
+    env_file:
+      - variaveis.env
+    depends_on:
+      - db
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    command: >
+      bash -c "airflow db upgrade &&
+               airflow scheduler"
+
   dbt:
     image: ghcr.io/dbt-labs/dbt-postgres:1.7.9
     container_name: dbt
@@ -41,10 +51,13 @@ services:
       - db
     environment:
       DBT_PROFILES_DIR: /dbt
+      DBT_DOCS_SERVER_HOST: 0.0.0.0
     volumes:
       - ./dbt:/dbt
     working_dir: /dbt
-    entrypoint: ["tail", "-f", "/dev/null"]  # Mantém o container rodando para execuções interativas
+    entrypoint: ["tail", "-f", "/dev/null"]
+    ports:
+      - "8081:8080"
 
 volumes:
   postgres_data:

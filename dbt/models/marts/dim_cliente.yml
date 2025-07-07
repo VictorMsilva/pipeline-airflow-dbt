@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_cliente
+    description: "Dimensão de clientes com dados cadastrais e localização"
+    columns:
+      - name: id_cliente
+        tests:
+          - not_null
+          - unique
+      - name: tipo_cliente
+        tests:
+          - accepted_values:
+              values: ['atacado', 'varejo']
+      - name: email
+        tests:
+          - not_null

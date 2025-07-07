@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: dim_vendedor
+    description: "Dimensão de vendedores com dados de contato e departamento"
+    columns:
+      - name: id_vendedor
+        tests:
+          - not_null
+          - unique
+      - name: nome_departamento
+        tests:
+          - not_null

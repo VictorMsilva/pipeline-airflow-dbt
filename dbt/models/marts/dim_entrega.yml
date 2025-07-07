@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: dim_entrega
+    description: "Dimensão de entregas com status e localização"
+    columns:
+      - name: id_entrega
+        tests:
+          - not_null
+          - unique
+      - name: status_entrega
+        tests:
+          - accepted_values:
+              values: ['entregue', 'parcial', 'pendente']
