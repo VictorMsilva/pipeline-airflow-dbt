@@ -151,7 +151,7 @@ Cada linha representa um item vendido em um pedido.
 
 Representação visual da modelagem dimensional proposta:
 
-![Esquema Estrela – Modelagem Dimensional](star_schema_retail_wholesale.png)
+![Esquema Estrela – Modelagem Dimensional](docs/Star_schema_vendas.png)
 
 ---
 
