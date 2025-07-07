@@ -205,3 +205,19 @@ O projeto utiliza o [Apache Airflow](https://airflow.apache.org/) para orquestra
 
 - As DAGs (pipelines) ficam na pasta `dags/`.
 - O Airflow é executado em container Docker, acessível em [http://localhost:8080](http://localhost:8080).
+
+## ✅ Boas Práticas de Engenharia de Dados
+
+- **Separação de camadas:** Dados brutos, staging e modelos analíticos organizados em pastas distintas.
+- **Versionamento e reprodutibilidade:** Todo o pipeline é versionado no Git e executável via Docker.
+- **Gerenciamento seguro de variáveis:** Credenciais e parâmetros sensíveis em arquivos de ambiente, nunca no código.
+- **Testes automatizados:** DBT garante integridade dos dados com testes de unicidade, nulidade e relacionamentos.
+- **Orquestração modular:** Airflow agenda, monitora e facilita a extensão dos pipelines.
+- **Documentação e lineage:** DBT Docs gera documentação automática e visualização do fluxo de dados.
+
+## 📈 Entrega de Resultados
+
+- **Tabelas analíticas validadas:** Prontas para BI e análises.
+- **Pipeline automatizado:** Da ingestão à disponibilização dos dados, tudo monitorado pelo Airflow.
+- **Ambiente reproduzível:** Qualquer pessoa pode clonar e rodar o projeto do zero.
+- **Pronto para integração:** Dados finais conectáveis a ferramentas como Metabase ou Power BI.
