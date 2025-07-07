@@ -351,3 +351,11 @@ File Path                          PID    Runtime      # DAGs    # Errors  Last 
 ================================================================================
 [2025-07-07T20:41:28.012+0000] {manager.py:738} INFO - Searching for files in /opt/airflow/dags
 [2025-07-07T20:41:28.013+0000] {manager.py:741} INFO - There are 1 files in /opt/airflow/dags
+[2025-07-07T20:41:43.231+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                          PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+---------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/pipeline_dbt.py                           1           0  0.11s           2025-07-07T20:41:32
+================================================================================
