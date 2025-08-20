@@ -1,54 +1,54 @@
-# 🏗️ Pipeline de Geração e Transformação de Dados Sintéticos com Docker, Airflow + DBT
+# 🏗️ Synthetic Data Generation and Transformation Pipeline with Docker, Airflow + DBT
 
-## 📌 Resumo do Projeto
-Pipeline automatizado e modular para gerar, transformar e disponibilizar dados sintéticos de uma empresa fictícia de materiais de limpeza, utilizando containers Docker para facilitar a execução e reprodutibilidade do ambiente.
-
----
-
-## 🩺 Contexto e Problema
-Empresas de varejo e atacado precisam analisar dados de vendas, clientes e estoque, mas nem sempre possuem bases de dados estruturadas para testes. A construção manual desses dados pode ser trabalhosa e pouco escalável.
-
-Este projeto resolve o problema criando um pipeline baseado em Docker, que gera, transforma e disponibiliza tabelas analíticas para simular um ambiente de vendas e logística.
+## 📌 Project Overview
+Automated and modular pipeline to generate, transform, and provide synthetic data for a fictitious cleaning products company, using Docker containers to facilitate environment execution and reproducibility.
 
 ---
 
-## 🎯 Objetivos
-- Gerar dados sintéticos de vendas, clientes e estoque
-- Containerizar o ambiente para facilitar deploy e reprodução
-- Automatizar a transformação e validação dos dados
-- Construir um pipeline escalável com Airflow e DBT
-- Simular relatórios de BI para análise de desempenho
+## 🩺 Context and Problem
+Retail and wholesale companies need to analyze sales, customer, and inventory data, but often lack structured databases for testing. Manually building these datasets can be laborious and not scalable.
+
+This project solves the problem by creating a Docker-based pipeline that generates, transforms, and provides analytical tables to simulate a sales and logistics environment.
 
 ---
 
-## 🧰 Stack Tecnológica
+## 🎯 Objectives
+- Generate synthetic sales, customer, and inventory data
+- Containerize the environment for easy deployment and reproducibility
+- Automate data transformation and validation
+- Build a scalable pipeline with Airflow and DBT
+- Simulate BI reports for performance analysis
+
+---
+
+## 🧰 Tech Stack
 - **Containers:** Docker + Docker Compose
-- **Orquestração:** Apache Airflow
-- **Transformação:** DBT (Data Build Tool)
-- **Armazenamento:** PostgreSQL (em container)
-- **Geração de Dados:** Faker, pandas
-- **Visualização (opcional):** Metabase, Power BI ou Streamlit
+- **Orchestration:** Apache Airflow
+- **Transformation:** DBT (Data Build Tool)
+- **Storage:** PostgreSQL (in container)
+- **Data Generation:** Faker, pandas
+- **Visualization (optional):** Metabase, Power BI, or Streamlit
 
 ---
 
-## ⚙️ Estrutura do Projeto
+## ⚙️ Project Structure
 
 ```plaintext
 pipeline-airflow-dbt/
-├── dags/                        # DAGs do Airflow (orquestração)
+├── dags/                        # Airflow DAGs (orchestration)
 │   └── example_dag.py
-├── dbt/                         # Projeto DBT (transformações analíticas)
+├── dbt/                         # DBT Project (analytical transformations)
 │   ├── models/
 │   │   └── example_model.sql
 │   ├── seeds/
 │   │   └── example_seed.csv
 │   ├── dbt_project.yml
 │   └── profiles.yml
-├── data/                        # Dados em diferentes estágios
+├── data/                        # Data at different stages
 │   ├── raw/
 │   ├── processed/
 │   └── analytics/
-├── src/                         # Código-fonte principal
+├── src/                         # Main source code
 │   ├── ingestion/
 │   │   └── generate_data.py
 │   ├── processing/
@@ -60,10 +60,10 @@ pipeline-airflow-dbt/
 │   ├── utils/
 │   │   └── logger.py
 │   └── __init__.py
-├── scripts/                     # Scripts auxiliares
+├── scripts/                     # Auxiliary scripts
 │   ├── run_pipeline.py
 │   └── setup_env.py
-├── tests/                       # Testes unitários e integração
+├── tests/                       # Unit and integration tests
 │   ├── ingestion/
 │   │   └── test_generate_data.py
 │   ├── processing/
@@ -74,9 +74,9 @@ pipeline-airflow-dbt/
 │   │   └── test_schema_check.py
 │   └── utils/
 │       └── test_logger.py
-├── notebooks/                   # Notebooks para exploração
+├── notebooks/                   # Data exploration notebooks
 │   └── exploracao_dados.ipynb
-├── configs/                     # Configurações e variáveis
+├── configs/                     # Configurations and variables
 │   ├── config.yaml
 │   └── .env.example
 ├── requirements.txt
@@ -86,15 +86,15 @@ pipeline-airflow-dbt/
 
 ---
 
-## 📦 Modelagem Dimensional – Projeto Vendas
+## 📦 Dimensional Modeling – Sales Project
 
-### 🧠 Processo de Negócio
-Venda de produtos por clientes, registrados em pedidos e entregues em endereços, com pagamentos e avaliações.
+### 🧠 Business Process
+Product sales by customers, registered in orders and delivered to addresses, with payments and reviews.
 
-### 📏 Grão da Fato Principal
-Cada linha representa um item vendido em um pedido.
+### 📏 Fact Table Grain
+Each row represents an item sold in an order.
 
-### 📊 Tabela Fato: `fato_vendas`
+### 📊 Fact Table: `fato_vendas`
 - id_item_pedido
 - id_pedido
 - id_cliente
@@ -105,7 +105,7 @@ Cada linha representa um item vendido em um pedido.
 - preco_unitario
 - valor_total
 
-### 🧩 Tabelas de Dimensão
+### 🧩 Dimension Tables
 
 **dim_cliente**
 - id_cliente
@@ -149,31 +149,31 @@ Cada linha representa um item vendido em um pedido.
 
 ## ⭐ Star Schema
 
-Representação visual da modelagem dimensional proposta:
+Visual representation of the proposed dimensional model:
 
-![Esquema Estrela – Modelagem Dimensional](docs/Star_schema_vendas.png)
+![Star Schema – Dimensional Modeling](docs/Star_schema_vendas.png)
 
 ---
 
-## 🏗️ Camadas do Projeto
+## 🏗️ Project Layers
 
-### 1. Camada RAW / Staging (`models/staging/`)
-Tratamento dos dados brutos:
-- Limpeza de inconsistências
-- Padronização de formatos
-- Eliminação de nulos e duplicatas
-- Conversões de tipos (ex: datas, numéricos)
+### 1. RAW / Staging Layer (`models/staging/`)
+Raw data treatment:
+- Cleaning inconsistencies
+- Standardizing formats
+- Removing nulls and duplicates
+- Type conversions (e.g., dates, numerics)
 
-**Modelos incluídos:**
+**Included models:**
 - `stg_clientes.sql`, `stg_enderecos.sql`, `stg_produtos.sql`
 - `stg_vendedores.sql`, `stg_departamentos.sql`, `stg_pedidos.sql`
 - `stg_itens_pedido.sql`, `stg_pagamentos.sql`, `stg_entregas.sql`
 - `stg_categorias.sql`, `stg_fornecedores.sql`, `stg_datas.sql`, `stg_feriados.sql`
 
-### 2. Camada de Modelagem (`models/marts/`)
-Modelos incrementais que inserem dados diretamente nas tabelas físicas criadas no banco. Cada dimensão é populada e atualizada de forma incremental.
+### 2. Modeling Layer (`models/marts/`)
+Incremental models that insert data directly into physical tables in the database. Each dimension is populated and updated incrementally.
 
-**Modelos incluídos:**
+**Included models:**
 - `dim_cliente.sql`
 - `dim_produto.sql`
 - `dim_vendedor.sql`
@@ -182,65 +182,65 @@ Modelos incrementais que inserem dados diretamente nas tabelas físicas criadas 
 - `dim_data.sql`
 - `fato_vendas.sql`
 
-## 🧪 Testes Automatizados
+## 🧪 Automated Tests
 
-Cada dimensão e fato tem testes definidos via arquivos `.yml`, como:
-- `not_null` — campos obrigatórios
-- `unique` — chaves primárias
-- `accepted_values` — domínios válidos
-- `relationships` — integridade referencial
+Each dimension and fact has tests defined via `.yml` files, such as:
+- `not_null` — required fields
+- `unique` — primary keys
+- `accepted_values` — valid domains
+- `relationships` — referential integrity
 
-## 📚 Documentação DBT e Data Lineage
+## 📚 DBT Documentation and Data Lineage
 
-O projeto utiliza o [DBT Docs](https://docs.getdbt.com/docs/building-a-dbt-project/documentation) para documentar todos os modelos, fontes, testes e dependências do pipeline de dados.
+The project uses [DBT Docs](https://docs.getdbt.com/docs/building-a-dbt-project/documentation) to document all models, sources, tests, and pipeline dependencies.
 
-- Para visualizar a documentação interativa e o lineage graph, rode:
+- To view the interactive documentation and lineage graph, run:
 
   dbt docs generate
   dbt docs serve --port 8080
 
-## 🚦 Orquestração com Apache Airflow
+## 🚦 Orchestration with Apache Airflow
 
-O projeto utiliza o [Apache Airflow](https://airflow.apache.org/) para orquestrar e automatizar o pipeline de dados, garantindo que as etapas de ingestão, transformação (DBT) e validação sejam executadas de forma controlada e agendada.
+The project uses [Apache Airflow](https://airflow.apache.org/) to orchestrate and automate the data pipeline, ensuring that ingestion, transformation (DBT), and validation steps are executed in a controlled and scheduled manner.
 
-- As DAGs (pipelines) ficam na pasta `dags/`.
-- O Airflow é executado em container Docker, acessível em [http://localhost:8080](http://localhost:8080).
+- DAGs (pipelines) are in the `dags/` folder.
+- Airflow runs in a Docker container, accessible at [http://localhost:8080](http://localhost:8080).
 
-## ✅ Boas Práticas de Engenharia de Dados
+## ✅ Data Engineering Best Practices
 
-- **Separação de camadas:** Dados brutos, staging e modelos analíticos organizados em pastas distintas.
-- **Versionamento e reprodutibilidade:** Todo o pipeline é versionado no Git e executável via Docker.
-- **Gerenciamento seguro de variáveis:** Credenciais e parâmetros sensíveis em arquivos de ambiente, nunca no código.
-- **Testes automatizados:** DBT garante integridade dos dados com testes de unicidade, nulidade e relacionamentos.
-- **Orquestração modular:** Airflow agenda, monitora e facilita a extensão dos pipelines.
-- **Documentação e lineage:** DBT Docs gera documentação automática e visualização do fluxo de dados.
+- **Layer separation:** Raw, staging, and analytical models organized in separate folders.
+- **Versioning and reproducibility:** The entire pipeline is versioned in Git and executable via Docker.
+- **Secure variable management:** Credentials and sensitive parameters in environment files, never in code.
+- **Automated tests:** DBT ensures data integrity with uniqueness, nullity, and relationship tests.
+- **Modular orchestration:** Airflow schedules, monitors, and facilitates pipeline extension.
+- **Documentation and lineage:** DBT Docs generates automatic documentation and data flow visualization.
 
-## 📈 Entrega de Resultados
+## 📈 Deliverables
 
-- **Tabelas analíticas validadas:** Prontas para BI e análises.
-- **Pipeline automatizado:** Da ingestão à disponibilização dos dados, tudo monitorado pelo Airflow.
-- **Ambiente reproduzível:** Qualquer pessoa pode clonar e rodar o projeto do zero.
-- **Pronto para integração:** Dados finais conectáveis a ferramentas como Metabase ou Power BI.
+- **Validated analytical tables:** Ready for BI and analysis.
+- **Automated pipeline:** From ingestion to data delivery, all monitored by Airflow.
+- **Reproducible environment:** Anyone can clone and run the project from scratch.
+- **Ready for integration:** Final data connectable to tools like Metabase or Power BI.
 
 ---
 
-## 🚀 Como configurar o ambiente Python (recomendado: Python 3.11)
+## 🚀 How to set up the Python environment (recommended: Python 3.11)
 
-> **Atenção:** O Apache Airflow 2.8.x não é compatível com Python 3.12. Use Python 3.11 para evitar erros de instalação.
+> **Attention:** Apache Airflow 2.8.x is not compatible with Python 3.12. Use Python 3.11 to avoid installation errors.
 
-### 1. Instale o Python 3.11 (no Ubuntu/WSL)
+### 1. Install Python 3.11 (on Ubuntu/WSL)
 ```bash
 sudo apt update
 sudo apt install python3.11 python3.11-venv python3.11-distutils
 ```
 
-### 2. Crie e ative o ambiente virtual
+### 2. Create and activate the virtual environment
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3. Instale as dependências do projeto
+### 3. Install project dependencies
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
@@ -249,44 +249,43 @@ pip install apache-airflow==2.8.4
 
 ---
 
-## 🚀 Como executar o projeto com Docker
+## 🚀 How to run the project with Docker
 
-### 1. Instale o Docker e o Docker Compose (caso ainda não tenha)
+### 1. Install Docker and Docker Compose (if not already installed)
 
-No Ubuntu/WSL:
+On Ubuntu/WSL:
 ```bash
 sudo apt update
 sudo apt install -y docker.io docker-compose
 ```
 
+### 2. Start the project containers
 
-### 2. Suba os containers do projeto
-
-Na raiz do projeto, execute:
+In the project root, run:
 ```bash
 docker-compose up -d
 ```
-Isso irá iniciar todos os serviços necessários (Airflow, DBT, banco de dados, etc) em containers.
+This will start all necessary services (Airflow, DBT, database, etc) in containers.
 
-### 3. Gere e carregue os dados sintéticos no banco
+### 3. Generate and load synthetic data into the database
 
-Execute o script SQL de geração de dados sintéticos dentro do container do banco de dados:
+Run the SQL script to generate synthetic data inside the database container:
 ```bash
 docker-compose exec db psql -U admin -d empresa -f /scripts/SQL/start_gen_dados_sinteticos.sql
 ```
 
-### 4. Execute o pipeline DBT
+### 4. Run the DBT pipeline
 
-Dentro do container DBT, rode:
+Inside the DBT container, run:
 ```bash
 docker-compose exec dbt dbt run
 docker-compose exec dbt dbt test
 ```
-Esses comandos vão criar os modelos analíticos e rodar os testes de qualidade de dados.
+These commands will create the analytical models and run data quality tests.
 
-### 5. Acesse o Airflow
+### 5. Access Airflow
 
-Abra o navegador e acesse: http://localhost:8080
+Open your browser and go to: http://localhost:8080
 
-- Usuário e senha padrão geralmente são `airflow` / `airflow` (verifique no seu docker-compose.yml)
-- Execute a DAG desejada para rodar o pipeline e os testes DBT.
+- Default username and password are usually `airflow` / `airflow` (check your docker-compose.yml)
+- Trigger the desired DAG to run the pipeline and DBT tests.
