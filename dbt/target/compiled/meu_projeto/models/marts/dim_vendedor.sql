@@ -10,5 +10,3 @@ SELECT
 FROM "empresa"."public"."stg_vendedores" v
 LEFT JOIN "empresa"."public"."stg_departamentos" d ON v.id_departamento = d.id_departamento
 
-
-AND v.data_contratacao > (SELECT MAX(data_contratacao) FROM "empresa"."public"."dim_vendedor")

@@ -10,7 +10,6 @@ CREATE TABLE fato_vendas (
     preco_unitario DECIMAL(10,2),
     valor_total DECIMAL(10,2)
 );
-
 -- Dimensão Cliente
 CREATE TABLE dim_cliente (
     id_cliente INT PRIMARY KEY,
@@ -22,7 +21,6 @@ CREATE TABLE dim_cliente (
     estado VARCHAR(50),
     data_cadastro DATE
 );
-
 -- Dimensão Produto
 CREATE TABLE dim_produto (
     id_produto INT PRIMARY KEY,

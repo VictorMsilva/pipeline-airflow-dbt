@@ -1,19 +1,30 @@
 
       
-        
-            delete from "empresa"."public"."dim_produto"
-            where (
-                id_produto) in (
-                select (id_produto)
-                from "dim_produto__dbt_tmp193914893385"
-            );
-
-        
+  
     
 
-    insert into "empresa"."public"."dim_produto" ("id_produto", "nome_produto", "descricao", "preco_unitario", "nome_categoria", "nome_fornecedor", "cidade_fornecedor", "estado_fornecedor")
-    (
-        select "id_produto", "nome_produto", "descricao", "preco_unitario", "nome_categoria", "nome_fornecedor", "cidade_fornecedor", "estado_fornecedor"
-        from "dim_produto__dbt_tmp193914893385"
-    )
+  create  table "empresa"."public"."dim_produto"
+  
+  
+    as
+  
+  (
+    
+
+SELECT
+  p.id_produto,
+  p.nome_produto,
+  p.descricao,
+  p.preco_unitario,
+  cat.nome_categoria,
+  f.nome_fornecedor,
+  f.cidade_fornecedor,
+  f.estado_fornecedor
+FROM "empresa"."public"."stg_produtos" p
+LEFT JOIN "empresa"."public"."stg_categorias" cat ON p.id_categoria = cat.id_categoria
+LEFT JOIN "empresa"."public"."stg_fornecedores" f ON p.id_fornecedor = f.id_fornecedor
+
+
+  );
+  
   

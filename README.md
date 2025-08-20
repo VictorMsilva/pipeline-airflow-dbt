@@ -221,3 +221,72 @@ O projeto utiliza o [Apache Airflow](https://airflow.apache.org/) para orquestra
 - **Pipeline automatizado:** Da ingestão à disponibilização dos dados, tudo monitorado pelo Airflow.
 - **Ambiente reproduzível:** Qualquer pessoa pode clonar e rodar o projeto do zero.
 - **Pronto para integração:** Dados finais conectáveis a ferramentas como Metabase ou Power BI.
+
+---
+
+## 🚀 Como configurar o ambiente Python (recomendado: Python 3.11)
+
+> **Atenção:** O Apache Airflow 2.8.x não é compatível com Python 3.12. Use Python 3.11 para evitar erros de instalação.
+
+### 1. Instale o Python 3.11 (no Ubuntu/WSL)
+```bash
+sudo apt update
+sudo apt install python3.11 python3.11-venv python3.11-distutils
+```
+
+### 2. Crie e ative o ambiente virtual
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Instale as dependências do projeto
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+pip install apache-airflow==2.8.4
+```
+
+---
+
+## 🚀 Como executar o projeto com Docker
+
+### 1. Instale o Docker e o Docker Compose (caso ainda não tenha)
+
+No Ubuntu/WSL:
+```bash
+sudo apt update
+sudo apt install -y docker.io docker-compose
+```
+
+
+### 2. Suba os containers do projeto
+
+Na raiz do projeto, execute:
+```bash
+docker-compose up -d
+```
+Isso irá iniciar todos os serviços necessários (Airflow, DBT, banco de dados, etc) em containers.
+
+### 3. Gere e carregue os dados sintéticos no banco
+
+Execute o script SQL de geração de dados sintéticos dentro do container do banco de dados:
+```bash
+docker-compose exec db psql -U admin -d empresa -f /scripts/SQL/start_gen_dados_sinteticos.sql
+```
+
+### 4. Execute o pipeline DBT
+
+Dentro do container DBT, rode:
+```bash
+docker-compose exec dbt dbt run
+docker-compose exec dbt dbt test
+```
+Esses comandos vão criar os modelos analíticos e rodar os testes de qualidade de dados.
+
+### 5. Acesse o Airflow
+
+Abra o navegador e acesse: http://localhost:8080
+
+- Usuário e senha padrão geralmente são `airflow` / `airflow` (verifique no seu docker-compose.yml)
+- Execute a DAG desejada para rodar o pipeline e os testes DBT.

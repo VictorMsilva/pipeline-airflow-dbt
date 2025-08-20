@@ -1,19 +1,27 @@
 
       
-        
-            delete from "empresa"."public"."dim_vendedor"
-            where (
-                id_vendedor) in (
-                select (id_vendedor)
-                from "dim_vendedor__dbt_tmp193914960079"
-            );
-
-        
+  
     
 
-    insert into "empresa"."public"."dim_vendedor" ("id_vendedor", "nome", "telefone", "email", "nome_departamento", "data_contratacao")
-    (
-        select "id_vendedor", "nome", "telefone", "email", "nome_departamento", "data_contratacao"
-        from "dim_vendedor__dbt_tmp193914960079"
-    )
+  create  table "empresa"."public"."dim_vendedor"
+  
+  
+    as
+  
+  (
+    
+
+SELECT
+  v.id_vendedor,
+  v.nome,
+  v.telefone,
+  v.email,
+  d.nome_departamento,
+  v.data_contratacao
+FROM "empresa"."public"."stg_vendedores" v
+LEFT JOIN "empresa"."public"."stg_departamentos" d ON v.id_departamento = d.id_departamento
+
+
+  );
+  
   

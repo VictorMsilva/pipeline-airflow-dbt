@@ -1,0 +1,26 @@
+[2025-08-20T02:20:46.063+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_dbt.dbt_run scheduled__2025-08-19T00:00:00+00:00 [queued]>
+[2025-08-20T02:20:46.073+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_dbt.dbt_run scheduled__2025-08-19T00:00:00+00:00 [queued]>
+[2025-08-20T02:20:46.073+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2025-08-20T02:20:46.091+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run> on 2025-08-19 00:00:00+00:00
+[2025-08-20T02:20:46.096+0000] {standard_task_runner.py:60} INFO - Started process 265 to run task
+[2025-08-20T02:20:46.101+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'pipeline_dbt', 'dbt_run', 'scheduled__2025-08-19T00:00:00+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_dbt.py', '--cfg-path', '/tmp/tmpiyn0pbal']
+[2025-08-20T02:20:46.105+0000] {standard_task_runner.py:88} INFO - Job 5: Subtask dbt_run
+[2025-08-20T02:20:46.134+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.8/site-packages/airflow/settings.py:194 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-08-20T02:20:46.200+0000] {task_command.py:423} INFO - Running <TaskInstance: pipeline_dbt.dbt_run scheduled__2025-08-19T00:00:00+00:00 [running]> on host 76cc110bf79d
+[2025-08-20T02:20:46.333+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='pipeline_dbt' AIRFLOW_CTX_TASK_ID='dbt_run' AIRFLOW_CTX_EXECUTION_DATE='2025-08-19T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-19T00:00:00+00:00'
+[2025-08-20T02:20:46.335+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-20T02:20:46.336+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'docker exec dbt dbt run']
+[2025-08-20T02:20:46.350+0000] {subprocess.py:86} INFO - Output:
+[2025-08-20T02:20:46.369+0000] {subprocess.py:93} INFO - Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+[2025-08-20T02:20:46.370+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-08-20T02:20:46.389+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-08-20T02:20:46.393+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=pipeline_dbt, task_id=dbt_run, execution_date=20250819T000000, start_date=20250820T022046, end_date=20250820T022046
+[2025-08-20T02:20:46.411+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 5 for task dbt_run (Bash command failed. The command returned a non-zero exit code 1.; 265)
+[2025-08-20T02:20:46.437+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-08-20T02:20:46.471+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

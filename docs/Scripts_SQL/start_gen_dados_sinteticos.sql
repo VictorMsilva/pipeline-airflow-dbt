@@ -7,7 +7,6 @@ CREATE TABLE clientes (
     email VARCHAR(255),
     data_cadastro DATE
 );
-
 CREATE TABLE enderecos (
     id_endereco SERIAL PRIMARY KEY,
     id_cliente INT,
@@ -20,7 +19,6 @@ CREATE TABLE enderecos (
     tipo_endereco VARCHAR(20) CHECK (tipo_endereco IN ('residencial', 'comercial')),
     FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
 );
-
 CREATE TABLE vendedores (
     id_vendedor SERIAL PRIMARY KEY,
     nome VARCHAR(255),

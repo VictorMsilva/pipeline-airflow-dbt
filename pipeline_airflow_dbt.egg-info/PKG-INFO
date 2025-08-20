@@ -7,7 +7,6 @@ Requires-Python: >=3.11
 Description-Content-Type: text/markdown
 Requires-Dist: numpy>=2.3.0
 Requires-Dist: pandas>=2.3.0
-
 # pipeline-airflow-dbt
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)

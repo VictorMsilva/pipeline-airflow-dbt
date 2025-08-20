@@ -13,5 +13,3 @@ FROM "empresa"."public"."stg_produtos" p
 LEFT JOIN "empresa"."public"."stg_categorias" cat ON p.id_categoria = cat.id_categoria
 LEFT JOIN "empresa"."public"."stg_fornecedores" f ON p.id_fornecedor = f.id_fornecedor
 
-
-WHERE p.id_produto NOT IN (SELECT id_produto FROM "empresa"."public"."dim_produto")
