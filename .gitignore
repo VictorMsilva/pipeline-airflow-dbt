@@ -1,0 +1,3 @@
+variaveis.env
+logs/
+dbt/target/
