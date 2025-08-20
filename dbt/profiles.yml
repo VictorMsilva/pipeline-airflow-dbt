@@ -1,0 +1,11 @@
+default:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: db           # nome do serviço do banco no docker-compose
+      user: admin        # usuário do banco
+      password: admin    # senha do banco
+      port: 5432
+      dbname: empresa    # nome do banco de dados
+      schema: public 

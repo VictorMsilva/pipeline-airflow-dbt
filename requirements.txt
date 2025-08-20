@@ -1,0 +1,7 @@
+apache-airflow==2.8.4  
+dbt-core==1.7.13
+dbt-postgres==1.7.13ex
+pandas>=1.5
+python-dotenv>=1.0
+requests>=2.31
+protobuf==4.25.3
